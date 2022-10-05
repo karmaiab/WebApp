@@ -147,7 +147,7 @@ window.addEventListener('DOMContentLoaded', function(){
             this.src = src;
             this.alt = alt;
             this.title = title;
-            this.descrd = descr;
+            this.descr = descr;
             this.price = price;
             this.classes = classes;
             this.parent = document.querySelector(parentSelector);
@@ -162,7 +162,7 @@ window.addEventListener('DOMContentLoaded', function(){
         render() {
             const element = document.createElement('div');
 
-            if (this.classes.length == 0) {
+            if (this.classes.length === 0) {
                 this.classes = "menu__item";
                 element.classList.add(this.classes);
             } else {
@@ -174,7 +174,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 <h3 class="menu__item-subtitle">${this.title}</h3>
                 <div class="menu__item-descr">${this.descr}</div>
                 <div class="menu__item-divider"></div>
-                <div class=""menu__item-price>
+                <div class="menu__item-price">
                     <div class="menu__item-cost">Цена:</div>
                     <div class="menu__item-total"><span>${this.price}</span> EUR/день</div>
                 </div>
@@ -186,8 +186,8 @@ window.addEventListener('DOMContentLoaded', function(){
 
     getResource('http://localhost:3000/menu')
         .then(data => {
-            data.forEach(({img, alting, title, descr, price}) => {
-                new MenuCard(img, alting, title, descr, price, ".menu .container")
+            data.forEach(({img, altimg, title, descr, price}) => {
+                new MenuCard(img, altimg, title, descr, price, ".menu .container").render();
             });
         });
 
@@ -237,7 +237,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 margin: 0 auto;
             `;
             form.insertAdjacentElement('afterend', statusMessage);
-            const formData = new formData(form);
+            const formData = new FormData(form);
             const json = JSON.stringify(Object.fromEntries(formData.entries()));
 
             postData('http://localhost:3000/requests', json)
@@ -285,7 +285,7 @@ window.addEventListener('DOMContentLoaded', function(){
     const slides = document.querySelectorAll('.offer__slide'),
         slider = document.querySelector('.offer__slider'),
         prev = document.querySelector('.offer__slider-prev'),
-        next = document.querySelector('offer__slider-next'),
+        next = document.querySelector('.offer__slider-next'),
         total = document.querySelector('#total'),
         current = document.querySelector('#current'),
         slidesWrapper = document.querySelector('.offer__slider-wrapper'),
