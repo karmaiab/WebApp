@@ -32,8 +32,8 @@ function slider({container, slide, nextArrow, prevArrow, totalCounter, currentCo
     
     slider.style.position = 'relative';
     
-    const indicators = document.createElement('ol');
-        dots = [];
+    const indicators = document.createElement('ol'),
+         dots = [];
     indicators.classList.add('carousel-indicators');
     indicators.style.cssText = `
         position: absolute;
@@ -46,10 +46,10 @@ function slider({container, slide, nextArrow, prevArrow, totalCounter, currentCo
         margin-right: 15%;
         margin-left: 15%;
         list-style: none;
-    `; // Если хотите - добавьте в стили, но иногда у нас нет доступа к стилям
+    `;
     slider.append(indicators);
     
-    for(let i = 0; i < slides.length; i++) {
+    for (let i = 0; i < slides.length; i++) {
         const dot = document.createElement('li');
         dot.setAttribute('data-slide-to', i + 1);
         dot.style.cssText = `
@@ -100,15 +100,15 @@ function slider({container, slide, nextArrow, prevArrow, totalCounter, currentCo
     });
     
     prev.addEventListener('click', () => {
-        if (offset == (deleteNotDigits(width) * (slides.length - 1))) {
-            offset = 0;
+        if (offset == 0) {
+            offset = deleteNotDigits(width) * (slides.length - 1);
         } else {
             offset -= deleteNotDigits(width);
         }
     
         slidesField.style.transform = `translateX(-${offset}px)`;
     
-        if (slides.length == 1) {
+        if (slidesIndex == 1) {
             slideIndex = slides.length;
         } else {
             slideIndex--;
